@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours GitHub By Flav</title>
+    <style>
+        :root {
+            --primary: #0d1117;
+            --secondary: #161b22;
+            --accent: #238636;
+            --text: #c9d1d9;
+            --code-bg: #161b22;
+            --border: #30363d;
+            --highlight: #1f6feb;
+            --warning: #d29922;
+            --success: #238636;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 25px;
+        }
+        
+        .main-content {
+            background-color: var(--secondary);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        
+        .sidebar {
+            background-color: var(--secondary);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            align-self: start;
+        }
+        
+        h2 {
+            color: var(--highlight);
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: var(--accent);
+            margin: 20px 0 12px;
+            font-size: 1.4rem;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .note {
+            background-color: rgba(88, 166, 255, 0.15);
+            border-left: 4px solid var(--highlight);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .warning {
+            background-color: rgba(210, 153, 34, 0.15);
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .success {
+            background-color: rgba(35, 134, 54, 0.15);
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .option-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .option-a {
+            background-color: #1f6feb;
+            color: white;
+        }
+        
+        .option-b {
+            background-color: #8957e5;
+            color: white;
+        }
+        
+        .option-c {
+            background-color: #238636;
+            color: white;
+        }
+        
+        .code-block {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+        
+        .code-block code {
+            display: block;
+            white-space: pre;
+        }
+        
+        .file-structure {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 15px 0;
+            border: 1px solid var(--border);
+            line-height: 1.8;
+        }
+        
+        .faq-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--border);
+        }
+        
+        .faq-item h4 {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        
+        .icon {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: -1px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background-color: var(--primary);
+            border: 1px solid var(--border);
+            border-bottom: none;
+            cursor: pointer;
+            border-radius: 6px 6px 0 0;
+            margin-right: 5px;
+        }
+        
+        .tab.active {
+            background-color: var(--secondary);
+            border-bottom: 1px solid var(--secondary);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 0 6px 6px 6px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .preview-container {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .preview-header {
+            background-color: #f1f1f1;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .preview-dots {
+            display: flex;
+            margin-right: 10px;
+        }
+        
+        .preview-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+        
+        .preview-content {
+            padding: 20px;
+        }
+        
+        .preview-content h1 {
+            color: #333;
+            text-shadow: none;
+            margin-bottom: 15px;
+        }
+        
+        .preview-content p {
+            color: #555;
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: -1;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Déployer un site HTML/CSS/JS sur GitHub Pages <i>By Flavien</i></h1>
+        <p class="tagline">Guide complet pour publier votre site web statique gratuitement avec GitHub Pages, y compris le déploiement à partir de fichiers ZIP</p>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="section">
+                <h2>🚀 Objectif</h2>
+                <p>Publier un site web statique (HTML, CSS, JS) gratuitement en ligne en utilisant <strong>GitHub Pages</strong>.</p>
+            </div>
+            
+            <div class="section">
+                <h2>🛠️ Prérequis</h2>
+                <ol>
+                    <li>Un <strong>compte GitHub</strong> ➜ <a href="https://github.com" target="_blank" style="color: #58a6ff;">https://github.com</a></li>
+                    <li>Git installé sur ton ordinateur (facultatif si tu passes par l'interface web) ➜ <a href="https://git-scm.com" target="_blank" style="color: #58a6ff;">https://git-scm.com</a></li>
+                    <li>Ton projet HTML/CSS/JS prêt dans un dossier local ou sous forme d'archive ZIP</li>
+                </ol>
+            </div>
+            
+            <div class="section">
+                <h2>📦 Structure typique du projet</h2>
+                <div class="file-structure">
+                    mon-site/<br>
+                    ├── index.html<br>
+                    ├── style.css<br>
+                    ├── script.js<br>
+                    └── images/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;├── logo.png<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;└── background.jpg
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📘 Étapes détaillées</h2>
+                
+                <div class="section">
+                    <h3><span class="step-number">1</span> Créer un dépôt GitHub</h3>
+                    <ol>
+                        <li>Connecte-toi à <a href="https://github.com" target="_blank" style="color: #58a6ff;">GitHub.com</a></li>
+                        <li>Clique sur le <strong>+</strong> en haut à droite → <strong>"New repository"</strong></li>
+                        <li>Remplis :
+                            <ul>
+                                <li><strong>Repository name</strong> : <code>mon-site-html</code> (ou autre nom)</li>
+                                <li><strong>Public</strong></li>
+                                <li><strong>Ne coche pas</strong> "Initialize with README" (si tu utilises Git en local)</li>
+                            </ul>
+                        </li>
+                        <li>Clique sur <strong>Create repository</strong></li>
+                    </ol>
+                </div>
+                
+                <div class="section">
+                    <h3><span class="step-number">2</span> Mettre ton site dans le dépôt</h3>
+                    
+                    <div class="tabs">
+                        <div class="tab active" data-tab="option-a">Option A: Avec Git</div>
+                        <div class="tab" data-tab="option-b">Option B: Sans Git</div>
+                        <div class="tab" data-tab="option-c">Option C: Fichier ZIP</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="option-a">
+                        <span class="option-tag option-a">Recommandé</span>
+                        <p>Pour les développeurs ou ceux qui travaillent régulièrement sur leur site.</p>
+                        <ol>
+                            <li>Ouvre un terminal (CMD, PowerShell, ou Git Bash) et place-toi dans ton dossier de site :
+                                <div class="code-block">
+                                    <code>cd chemin/vers/mon-site</code>
+                                </div>
+                            </li>
+                            <li>Initialise un dépôt Git :
+                                <div class="code-block">
+                                    <code>git init
+git remote add origin https://github.com/TON-UTILISATEUR/mon-site-html.git</code>
+                                </div>
+                            </li>
+                            <li>Ajoute et envoie les fichiers :
+                                <div class="code-block">
+                                    <code>git add .
+git commit -m "Premier commit"
+git branch -M main
+git push -u origin main</code>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div class="tab-content" id="option-b">
+                        <span class="option-tag option-b">Simple</span>
+                        <p>Pour ceux qui préfèrent utiliser l'interface web de GitHub.</p>
+                        <ol>
+                            <li>Va sur ton dépôt GitHub</li>
+                            <li>Clique sur <strong>"Add file" > "Upload files"</strong></li>
+                            <li>Glisse-dépose les fichiers <code>index.html</code>, <code>style.css</code>, <code>script.js</code>, etc.</li>
+                            <li>Clique sur <strong>Commit changes</strong></li>
+                        </ol>
+                    </div>
+                    
+                    <div class="tab-content" id="option-c">
+                        <span class="option-tag option-c">Nouveau</span>
+                        <p>Pour déployer un site à partir d'une archive ZIP.</p>
+                        <ol>
+                            <li>Sur ton ordinateur, extrais le contenu du fichier ZIP dans un dossier</li>
+                            <li>Va sur ton dépôt GitHub</li>
+                            <li>Clique sur <strong>"Add file" > "Upload files"</strong></li>
+                            <li>Glisse-dépose <strong>tous les fichiers</strong> extraits du ZIP</li>
+                            <li>Clique sur <strong>Commit changes</strong></li>
+                        </ol>
+                        <div class="note">
+                            <p><strong>Note :</strong> GitHub ne permet pas de déposer directement un fichier ZIP. Tu dois d'abord extraire son contenu, puis déposer les fichiers extraits.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h3><span class="step-number">3</span> Activer GitHub Pages</h3>
+                    <ol>
+                        <li>Va dans ton <strong>repository GitHub</strong></li>
+                        <li>Clique sur l'onglet <strong>"Settings"</strong></li>
+                        <li>Dans le menu à gauche, clique sur <strong>"Pages"</strong></li>
+                        <li>Dans <strong>"Source"</strong>, choisis :
+                            <ul>
+                                <li><strong>Branch</strong> : <code>main</code></li>
+                                <li><strong>Folder</strong> : <code>/ (root)</code></li>
+                            </ul>
+                        </li>
+                        <li>Clique sur <strong>"Save"</strong></li>
+                    </ol>
+                    <div class="warning">
+                        <p>⚠️ Patiente 30 secondes à 1 minute pour que GitHub déploie ton site.</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h3><span class="step-number">4</span> Accéder au site en ligne</h3>
+                    <ol>
+                        <li>Une URL s'affiche :
+                            <div class="code-block">
+                                <code>https://ton-utilisateur.github.io/mon-site-html/</code>
+                            </div>
+                        </li>
+                        <li>Clique dessus ➜ ton site est <strong>en ligne</strong> 🎉</li>
+                    </ol>
+                    <div class="success">
+                        <p>✅ Félicitations ! Ton site est maintenant accessible publiquement sur internet.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>✅ Bonnes pratiques</h2>
+                <ul>
+                    <li>Ton <strong>fichier d'entrée doit s'appeler <code>index.html</code></strong></li>
+                    <li>Ne mets <strong>pas</strong> de fichiers dans un sous-dossier à part si tu choisis <code>/ (root)</code></li>
+                    <li>Tu peux mettre ton <strong>CSS</strong> dans un fichier à part ou dans le HTML</li>
+                    <li>Tes <strong>fichiers JS/CSS</strong> doivent être correctement liés dans <code>index.html</code> :
+                        <div class="code-block">
+                            <code>&lt;link rel="stylesheet" href="style.css" /&gt;
+&lt;script src="script.js" defer&gt;&lt;/script&gt;</code>
+                        </div>
+                    </li>
+                    <li>Pour les fichiers ZIP : <strong>extrais toujours le contenu</strong> avant de le déposer sur GitHub</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>🧪 Exemple ultra simple</h2>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="html">index.html</div>
+                    <div class="tab" data-tab="css">style.css</div>
+                    <div class="tab" data-tab="js">script.js</div>
+                    <div class="tab" data-tab="preview">Aperçu</div>
+                </div>
+                
+                <div class="tab-content active" id="html">
+                    <div class="code-block">
+                        <code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;title&gt;Mon Site&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Bienvenue sur mon site&lt;/h1&gt;
+  &lt;p&gt;Ce site est hébergé gratuitement sur GitHub Pages !&lt;/p&gt;
+  &lt;script src="script.js" defer&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="css">
+                    <div class="code-block">
+                        <code>body {
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 40px;
+  color: #333;
+}
+
+h1 {
+  color: #238636;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}</code>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="js">
+                    <div class="code-block">
+                        <code>// script.js
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("Le site est chargé !");
+  
+  // Exemple de fonctionnalité JS simple
+  const title = document.querySelector('h1');
+  title.addEventListener('click', function() {
+    this.style.color = '#' + Math.floor(Math.random()*16777215).toString(16);
+  });
+});</code>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="preview">
+                    <div class="preview-container">
+                        <div class="preview-header">
+                            <div class="preview-dots">
+                                <div class="preview-dot dot-red"></div>
+                                <div class="preview-dot dot-yellow"></div>
+                                <div class="preview-dot dot-green"></div>
+                            </div>
+                            <div>https://ton-utilisateur.github.io/mon-site-html/</div>
+                        </div>
+                        <div class="preview-content">
+                            <h1>Bienvenue sur mon site</h1>
+                            <p>Ce site est hébergé gratuitement sur GitHub Pages !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>❓ Questions fréquentes</h2>
+                
+                <div class="faq-item">
+                    <h4>Puis-je faire des mises à jour ?</h4>
+                    <p>Oui ! Modifie tes fichiers localement, puis fais <code>git add .</code>, <code>git commit</code> et <code>git push</code>. Si tu utilises l'interface web ou la méthode ZIP, dépose simplement les fichiers modifiés.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Peut-on faire un site avec plusieurs pages ?</h4>
+                    <p>Oui ! Ajoute d'autres fichiers <code>.html</code> comme <code>contact.html</code>, <code>about.html</code>, etc. Tu pourras y accéder via <code>https://ton-utilisateur.github.io/mon-site-html/contact.html</code>.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Et si je veux un nom de domaine personnalisé ?</h4>
+                    <p>Tu peux acheter un nom de domaine et le lier avec GitHub Pages via les <strong>paramètres DNS + fichier CNAME</strong>.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Comment déployer un site à partir d'un fichier ZIP ?</h4>
+                    <p>Extrais d'abord le contenu du ZIP sur ton ordinateur, puis dépose tous les fichiers extraits dans ton dépôt GitHub via l'interface web (Option C). GitHub ne permet pas de déposer directement un fichier ZIP.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Mon site ne s'affiche pas, que faire ?</h4>
+                    <p>Vérifie que :
+                        <ul>
+                            <li>Tu as bien un fichier <code>index.html</code> à la racine</li>
+                            <li>GitHub Pages est activé dans les paramètres du dépôt</li>
+                            <li>La branche et le dossier sont correctement configurés</li>
+                            <li>Les liens vers les fichiers CSS/JS sont corrects</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <h2>📌 Résumé des étapes</h2>
+            <ol>
+                <li>Créer un dépôt GitHub</li>
+                <li>Ajouter les fichiers :
+                    <ul>
+                        <li>Avec Git</li>
+                        <li>Sans Git</li>
+                        <li>Depuis un ZIP</li>
+                    </ul>
+                </li>
+                <li>Activer GitHub Pages</li>
+                <li>Accéder au site</li>
+            </ol>
+            
+            <h2>🔑 Points clés</h2>
+            <ul>
+                <li>Fichier principal : <code>index.html</code></li>
+                <li>GitHub Pages est gratuit</li>
+                <li>Déploiement instantané</li>
+                <li>Support des fichiers ZIP (après extraction)</li>
+            </ul>
+            
+            <h2>⏱️ Temps estimé</h2>
+            <ul>
+                <li>Premier déploiement : 5-10 minutes</li>
+                <li>Mises à jour : 1-2 minutes</li>
+            </ul>
+            
+            <h2>🔗 Ressources utiles</h2>
+            <ul>
+                <li><a href="https://pages.github.com" target="_blank" style="color: #58a6ff;">Site officiel GitHub Pages</a></li>
+                <li><a href="https://docs.github.com/fr/pages" target="_blank" style="color: #58a6ff;">Documentation GitHub Pages</a></li>
+                <li><a href="https://git-scm.com/downloads" target="_blank" style="color: #58a6ff;">Télécharger Git</a></li>
+                <li><a href="https://www.7-zip.org" target="_blank" style="color: #58a6ff;">7-Zip (pour les fichiers ZIP)</a></li>
+            </ul>
+            
+            <div class="note">
+                <h3>💡 Astuce ZIP</h3>
+                <p>Pour déployer à partir d'un ZIP :</p>
+                <ol>
+                    <li>Extraire le ZIP</li>
+                    <li>Ouvrir le dossier extrait</li>
+                    <li>Déposer tous les fichiers sur GitHub</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Simple animation for step numbers
+        document.querySelectorAll('.step-number').forEach((step, index) => {
+            setTimeout(() => {
+                step.style.transform = 'scale(1.1)';
+                step.style.backgroundColor = '#3fb950';
+                
+                setTimeout(() => {
+                    step.style.transform = 'scale(1)';
+                    step.style.backgroundColor = '#238636';
+                }, 300);
+            }, index * 200);
+        });
+        
+        // Add interactivity to the preview
+        document.addEventListener('DOMContentLoaded', function() {
+            const previewTitle = document.querySelector('.preview-content h1');
+            if (previewTitle) {
+                previewTitle.addEventListener('click', function() {
+                    const colors = ['#238636', '#1f6feb', '#8957e5', '#d29922'];
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    this.style.color = randomColor;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
